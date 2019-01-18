@@ -1,0 +1,43 @@
+{
+  "name": "api-server",
+  "version": "1.0.0",
+  "description": "![CF](http://i.imgur.com/7v5ASc8.png) LAB =================================================",
+  "main": "node index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json",
+    "test-watch": "jest --watchAll",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hcherewaty/API-Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hcherewaty/API-Server/issues"
+  },
+  "homepage": "https://github.com/hcherewaty/API-Server#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.3",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "jest": "^23.6.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongodb-memory-server": "^3.0.0",
+    "mongoose": "^5.4.4",
+    "mongoose-schema-jsonschema": "^1.2.1",
+    "morgan": "^1.9.1",
+    "require-directory": "^2.1.1",
+    "supertest": "^3.4.1",
+    "swagger-ui-express": "^4.0.2",
+    "uuid": "^3.3.2"
+  }
+}
