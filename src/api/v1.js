@@ -12,6 +12,7 @@ const express = require('express');
 const swaggerUI = require('swagger-ui-express');
 
 const modelFinder = require(`${cwd}/src/middleware/model-finder.js`);
+const auth = require('../auth/router');
 
 const router = express.Router();
 
