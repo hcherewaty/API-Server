@@ -43,25 +43,26 @@ app.use(errorHandler);
  * Start Server on specified port
  * @param port {integer} (defaults to process.env.PORT)
  */
-let start = (port = process.env.PORT) => {
-  app.listen(port, () => {
-    console.log(`Server Up on ${port}`);
-  });
-};
-
-// module.exports = { ???
-//   server: app,
-//   start: (port) => {
-//     if( ! isRunning ) {
-//       app.listen(port, () => {
-//         isRunning = true;
-//         console.log(`Server Up on ${port}`);
-//       });
-//     }
-//     else {
-//       console.log('Server is already running');
-//     }
-//   },
+// let start = (port = process.env.PORT) => {
+//   app.listen(port, () => {
+//     console.log(`Server Up on ${port}`);
+//   });
 // };
+let isRunning = false;
+
+module.exports = { 
+  server: app,
+  start: (port) => {
+    if( ! isRunning ) {
+      app.listen(port, () => {
+        isRunning = true;
+        console.log(`Server Up on ${port}`);
+      });
+    }
+    else {
+      console.log('Server is already running');
+    }
+  },
+};
   
-module.exports = {app,start};
+// module.exports = {app,start};

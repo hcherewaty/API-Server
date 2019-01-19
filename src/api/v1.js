@@ -12,7 +12,10 @@ const express = require('express');
 const swaggerUI = require('swagger-ui-express');
 
 const modelFinder = require(`${cwd}/src/middleware/model-finder.js`);
-const auth = require('../auth/router');
+// const auth = require('../auth/router');
+const auth = require('../auth/middleware');
+const Users = require('../auth/users-model');
+const Roles = require('../auth/roles-model');
 
 const router = express.Router();
 
@@ -24,12 +27,12 @@ const swaggerDocs = require(`${cwd}/docs/config/swagger.json`);
 router.use('/api/v1/doc/', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // API Routes
-router.get('/api/v1/:model', handleGetAll);
-router.post('/api/v1/:model', handlePost);
+router.get('/api/v1/:model', auth('read'), handleGetAll);
+router.post('/api/v1/:model', auth('create'), handlePost);
 
-router.get('/api/v1/:model/:id', handleGetOne);
-router.put('/api/v1/:model/:id', handlePut);
-router.delete('/api/v1/:model/:id', handleDelete);
+router.get('/api/v1/:model/:id', auth('read'), handleGetOne);
+router.put('/api/v1/:model/:id', auth('update'), handlePut);
+router.delete('/api/v1/:model/:id', auth('delete'), handleDelete);
 
 // Route Handlers
 
