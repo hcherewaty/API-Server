@@ -16,7 +16,7 @@ const morgan = require('morgan');
 const errorHandler = require( `${cwd}/src/middleware/500.js`);
 const notFound = require( `${cwd}/src/middleware/404.js` );
 const v1Router = require( `${cwd}/src/api/v1.js` );
-// const authRouter = require( './auth/router.js' ); ???
+const authRouter = require( './auth/router' );
 
 // Prepare the express app
 const app = express();
@@ -33,7 +33,7 @@ app.use('/docs', express.static('docs'));
 
 // Routes
 app.use(v1Router);
-// app.use(authRouter); ???
+app.use(authRouter); 
 
 // Catchalls
 app.use(notFound);
