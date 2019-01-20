@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * Router Module
+ * @module src/auth/router
+ */
+
 const express = require('express');
 const authRouter = express.Router();
 
@@ -12,18 +17,18 @@ const oauth = require('./oauth/google.js');
 authRouter.post('/newrole', (req, res, next) => {
   let role = new Role(req.body);
   role.save()
-  .then( role => {
-    res.status(200).send(role);
-    
-  }) 
-  .catch(next);
-})
+    .then(role => {
+      res.status(200).send(role);
+
+    })
+    .catch(next);
+});
 
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);
   user.save()
-    .then( (user) => {
-      User.findOne({_id: user._id})
+    .then((user) => {
+      User.findOne({ _id: user._id })
         .then(user => {
           req.token = user.generateToken();
           req.user = user;
@@ -40,15 +45,15 @@ authRouter.post('/signin', auth(), (req, res, next) => {
   res.send(req.token);
 });
 
-authRouter.get('/oauth', (req,res,next) => {
+authRouter.get('/oauth', (req, res, next) => {
   oauth.authorize(req)
-    .then( token => {
+    .then(token => {
       res.status(200).send(token);
     })
     .catch(next);
 });
 
-authRouter.post('/key', auth, (req,res,next) => {
+authRouter.post('/key', auth, (req, res, next) => {
   let key = req.user.generateKey();
   res.status(200).send(key);
 });

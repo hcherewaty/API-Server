@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * Mongo Module
+ * @module src/models/mongo
+ */
+
 /** Class representing a generic mongo model. */
 class Model {
 

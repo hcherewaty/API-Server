@@ -1,8 +1,18 @@
 'use strict';
 
+/**
+ * OAuth Google Module
+ * @module src/auth/oauth/google
+ */
+
 const superagent = require('superagent');
 const Users = require('../users-model.js');
 
+/**
+ * Oauth authorization module
+ * @param {*} req
+ * @returns oauth from google
+ */
 const authorize = (req) => {
 
   let code = req.query.code;
