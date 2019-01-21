@@ -11,6 +11,82 @@
       "http"
     ],
     "paths": {
+      "/signup": {
+        "parameters": [
+          {
+          "in": "body",
+          "name": "username",
+          "required": true,
+          "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "email",
+            "required": false,
+            "type": "string"          
+          }
+        ],
+        "post": {
+          "description": "Signup for account",
+          "responses": {
+            "200": {
+              "description": "Creates Account"
+            }
+          }
+        },
+        "/signin": {
+          "parameters": [
+            {
+            "in": "body",
+            "name": "username",
+            "required": true,
+            "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "password",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "post": {
+            "description": "Signin to account",
+            "responses": {
+              "200": {
+                "description": "Grants access with authorized credentials"
+              }
+            }
+          },
+          "/newrole": {
+            "parameters": [
+              {
+              "in": "body",
+              "name": "role",
+              "required": true,
+              "type": "string"
+              },
+              {
+                "in": "body",
+                "name": "capabilities",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "post": {
+              "description": "Adds role to roles model",
+              "responses": {
+                "200": {
+                  "description": "role added"
+                }
+              }
+            }
+      },
       "/{model}": {
         "parameters": [
           {
