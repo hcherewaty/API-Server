@@ -23,7 +23,7 @@ const router = express.Router();
 router.param('model', modelFinder);
 
 // Swagger Docs
-const swaggerDocs = require(`${cwd}/docs/config/swagger.json`);
+const swaggerDocs = require(`../../docs/config/swagger.json`);
 router.use('/api/v1/doc/', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // API Routes

@@ -1,207 +1,209 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "N/A",
-      "version": "1",
-      "title": "Core API"
-    },
-    "host": "localhost:3000",
-    "basePath": "/api/v1",
-    "schemes": [
-      "http"
-    ],
-    "paths": {
-      "/signup": {
-        "parameters": [
-          {
+  "swagger": "2.0",
+  "info": {
+    "description": "N/A",
+    "version": "1",
+    "title": "Core API"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/signup": {
+      "parameters": [
+        {
           "in": "body",
           "name": "username",
           "required": true,
           "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "password",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "email",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "Signup for account",
+        "responses": {
+          "200": {
+            "description": "Creates Account"
+          }
+        }
+      },
+      "/signin": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "username",
+            "required": true,
+            "type": "string"
           },
           {
             "in": "body",
             "name": "password",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "email",
-            "required": false,
-            "type": "string"          
           }
         ],
         "post": {
-          "description": "Signup for account",
+          "description": "Signin to account",
           "responses": {
             "200": {
-              "description": "Creates Account"
+              "description": "Grants access with authorized credentials"
             }
           }
         },
-        "/signin": {
+        "/newrole": {
           "parameters": [
             {
-            "in": "body",
-            "name": "username",
-            "required": true,
-            "type": "string"
+              "in": "body",
+              "name": "role",
+              "required": true,
+              "type": "string"
             },
             {
               "in": "body",
-              "name": "password",
+              "name": "capabilities",
               "required": true,
               "type": "string"
             }
           ],
           "post": {
-            "description": "Signin to account",
+            "description": "Adds role to roles model",
             "responses": {
               "200": {
-                "description": "Grants access with authorized credentials"
+                "description": "role added"
               }
             }
-          },
-          "/newrole": {
-            "parameters": [
-              {
-              "in": "body",
-              "name": "role",
+          }
+        },
+        "/{model}": {
+          "parameters": [
+            {
+              "in": "path",
+              "name": "model",
               "required": true,
               "type": "string"
-              },
-              {
-                "in": "body",
-                "name": "capabilities",
-                "required": true,
-                "type": "string"
-              }
-            ],
-            "post": {
-              "description": "Adds role to roles model",
-              "responses": {
-                "200": {
-                  "description": "role added"
+            }
+          ],
+          "get": {
+            "description": "Get all resources in a model",
+            "responses": {
+              "200": {
+                "description": "Returned a list of resources",
+                "schema": {
+                  "$ref": "#/definitions/getAll"
                 }
               }
             }
-      },
-      "/{model}": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "model",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "get": {
-          "description": "Get all resources in a model",
-          "responses": {
-            "200": {
-              "description": "Returned a list of resources",
-              "schema": {
-                "$ref": "#/definitions/getAll"
-              }
-            }
-          }
-        },
-        "post": {
-          "description": "Create a new resource in the given model",
-          "responses": {
-            "200": {
-              "description": "Returns created resources",
-              "schema": {
-                "$ref": "#/definitions/single"
-              }
-            }
-          }
-        }
-      },
-      "/{model}/{id}": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "model",
-            "required": true,
-            "type": "string"
           },
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "get": {
-          "description": "Get a single resource from the data model",
-          "responses": {
-            "200": {
-              "description": "Returned one resource",
-              "schema": {
-                "$ref": "#/definitions/single"
+          "post": {
+            "description": "Create a new resource in the given model",
+            "responses": {
+              "200": {
+                "description": "Returns created resources",
+                "schema": {
+                  "$ref": "#/definitions/single"
+                }
               }
             }
           }
         },
-        "put": {
-          "description": "Replace a resource with the specified id in the given model",
-          "responses": {
-            "200": {
-              "description": "Returns replaced resource",
-              "schema": {
-                "$ref": "#/definitions/single"
+        "/{model}/{id}": {
+          "parameters": [
+            {
+              "in": "path",
+              "name": "model",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "get": {
+            "description": "Get a single resource from the data model",
+            "responses": {
+              "200": {
+                "description": "Returned one resource",
+                "schema": {
+                  "$ref": "#/definitions/single"
+                }
+              }
+            }
+          },
+          "put": {
+            "description": "Replace a resource with the specified id in the given model",
+            "responses": {
+              "200": {
+                "description": "Returns replaced resource",
+                "schema": {
+                  "$ref": "#/definitions/single"
+                }
+              }
+            }
+          },
+          "patch": {
+            "description": "Update a resource with the specified id in the given model",
+            "responses": {
+              "200": {
+                "description": "Returns replaced resource",
+                "schema": {
+                  "$ref": "#/definitions/single"
+                }
+              }
+            }
+          },
+          "delete": {
+            "description": "Delete a resource with the specified id in the given model",
+            "responses": {
+              "200": {
+                "description": "Returns replaced resource",
+                "schema": {
+                  "$ref": "#/definitions/single"
+                }
               }
             }
           }
-        },
-        "patch": {
-          "description": "Update a resource with the specified id in the given model",
-          "responses": {
-            "200": {
-              "description": "Returns replaced resource",
-              "schema": {
-                "$ref": "#/definitions/single"
-              }
-            }
-          }
-        },
-        "delete": {
-          "description": "Delete a resource with the specified id in the given model",
-          "responses": {
-            "200": {
-              "description": "Returns replaced resource",
-              "schema": {
-                "$ref": "#/definitions/single"
-              }
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "getAll": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {}
-        },
-        "example": {
-          "count:2": null,
-          "results": [
-            "{}",
-            "{}"
-          ]
         }
       },
-      "single": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {}
+      "definitions": {
+        "getAll": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {}
+          },
+          "example": {
+            "count:2": null,
+            "results": [
+              "{}",
+              "{}"
+            ]
+          }
         },
-        "example": {}
+        "single": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {}
+          },
+          "example": {}
+        }
       }
     }
   }
+}
